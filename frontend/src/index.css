@@ -1,0 +1,135 @@
+@import "tailwindcss";
+
+@theme {
+  --color-sony-black: #0A0A0A;
+  --color-sony-red: #E4002B;
+  --color-sony-red-dark: #B8001F;
+  --color-sony-red-glow: rgba(228, 0, 43, 0.4);
+  --color-sony-white: #F5F5F5;
+  --color-sony-surface: #1C1C1E;
+  --color-sony-surface-light: #2C2C2E;
+  --color-sony-gray: #8E8E93;
+  --color-sony-gray-dark: #636366;
+  --font-family-inter: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+@layer base {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: var(--font-family-inter);
+    background-color: var(--color-sony-black);
+    color: var(--color-sony-white);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--color-sony-black);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-sony-surface-light);
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-sony-gray-dark);
+  }
+}
+
+/* ─── Keyframe Animations ─── */
+
+@keyframes pulse-red {
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(228, 0, 43, 0.7); }
+  50% { opacity: 0.8; box-shadow: 0 0 0 6px rgba(228, 0, 43, 0); }
+}
+
+@keyframes border-sweep {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes aurora-glow {
+  0%, 100% { opacity: 0.4; transform: scale(1) rotate(0deg); }
+  33% { opacity: 0.6; transform: scale(1.05) rotate(2deg); }
+  66% { opacity: 0.5; transform: scale(0.98) rotate(-1deg); }
+}
+
+@keyframes float-y {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-16px); }
+}
+
+@keyframes skeleton-shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-pulse-red {
+  animation: pulse-red 2s ease-in-out infinite;
+}
+
+.animate-float {
+  animation: float-y 4s ease-in-out infinite;
+}
+
+.animate-aurora {
+  animation: aurora-glow 8s ease-in-out infinite;
+}
+
+.animate-border-sweep {
+  background: linear-gradient(90deg, transparent 0%, var(--color-sony-red) 50%, transparent 100%);
+  background-size: 200% 100%;
+  animation: border-sweep 2s linear infinite;
+}
+
+.animate-skeleton {
+  background: linear-gradient(90deg, var(--color-sony-surface) 25%, var(--color-sony-surface-light) 50%, var(--color-sony-surface) 75%);
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.5s ease-in-out infinite;
+}
+
+.glass {
+  background: rgba(28, 28, 30, 0.6);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(245, 245, 245, 0.08);
+}
+
+.glass-strong {
+  background: rgba(28, 28, 30, 0.85);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  border: 1px solid rgba(245, 245, 245, 0.1);
+}
+
+.text-gradient-red {
+  background: linear-gradient(135deg, var(--color-sony-red), #FF4D6A);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.glow-red {
+  box-shadow: 0 0 20px rgba(228, 0, 43, 0.3), 0 0 60px rgba(228, 0, 43, 0.1);
+}
+
+.glow-red-strong {
+  box-shadow: 0 0 30px rgba(228, 0, 43, 0.5), 0 0 80px rgba(228, 0, 43, 0.2);
+}
