@@ -1,0 +1,262 @@
+Sony Headphones Product Catalog & Knowledge Base
+=================================================
+
+## Sony WH-1000XM5 - Premium Wireless Noise Cancelling Headphones
+
+Price: Rs 29,990
+Category: Over-Ear, Wireless, Noise Cancelling
+Release Year: 2022
+
+The Sony WH-1000XM5 is Sony's flagship wireless noise-cancelling headphone. It features two processors controlling eight microphones for unprecedented noise cancellation. The headphone uses a newly designed 30mm driver unit with a lightweight construction weighing only 250g.
+
+Key Specifications:
+- Driver: 30mm
+- Frequency Response: 4 Hz - 40,000 Hz
+- Battery Life: 30 hours with NC ON, 40 hours with NC OFF
+- Charging: USB-C, 3 minutes charge = 3 hours playback
+- Bluetooth: 5.2 with LDAC, AAC, SBC
+- Active Noise Cancellation: Yes, Auto NC Optimizer
+- Speak-to-Chat: Yes
+- Multipoint Connection: Yes (2 devices simultaneously)
+- Weight: 250g
+- Colors: Black, Silver, Midnight Blue
+- Foldable: No (flat-fold design)
+- Headphone Type: Closed, Dynamic
+
+The WH-1000XM5 uses Dual Noise Sensor Technology with two processors (Integrated Processor V1 + QN1) to cancel more noise than ever. The Auto NC Optimizer automatically detects your environment and optimizes noise cancelling. It supports Sony's LDAC codec for Hi-Res Audio wireless transmission up to 990kbps. The headphone also features Adaptive Sound Control that adjusts ambient sound settings based on your activity and location.
+
+Best For: Premium noise cancellation, long flights, office use, audiophile-grade wireless listening
+Pros: Best-in-class ANC, excellent sound quality, very comfortable, great call quality with 4 beamforming microphones
+Cons: Does not fold flat for compact storage, expensive price point
+
+---
+
+## Sony WH-1000XM4 - Wireless Noise Cancelling Headphones
+
+Price: Rs 22,990
+Category: Over-Ear, Wireless, Noise Cancelling
+Release Year: 2020
+
+The Sony WH-1000XM4 is the predecessor to the XM5 and remains an excellent choice. It features a 40mm driver, dual noise sensor technology, and up to 30 hours of battery life. The XM4 has a foldable design which the XM5 lacks.
+
+Key Specifications:
+- Driver: 40mm
+- Frequency Response: 4 Hz - 40,000 Hz
+- Battery Life: 30 hours with NC ON
+- Charging: USB-C, 10 minutes charge = 5 hours playback
+- Bluetooth: 5.0 with LDAC, AAC, SBC
+- Active Noise Cancellation: Yes, Dual Noise Sensor Technology
+- Speak-to-Chat: Yes
+- Multipoint Connection: Yes
+- Weight: 254g
+- Colors: Black, Silver
+- Foldable: Yes
+
+Best For: Noise cancellation on a budget compared to XM5, travel (foldable design)
+Pros: Foldable, excellent ANC, great battery life, slightly cheaper than XM5
+Cons: Older Bluetooth version, slightly heavier than XM5
+
+---
+
+## Sony WF-1000XM5 - Premium True Wireless Earbuds
+
+Price: Rs 24,990
+Category: True Wireless, In-Ear, Noise Cancelling
+Release Year: 2023
+
+The Sony WF-1000XM5 are Sony's flagship true wireless earbuds with industry-leading noise cancellation. They feature a new Dynamic Driver X with an integrated processor V2 for superior noise cancellation in a smaller form factor. These are the smallest and lightest noise cancelling earbuds Sony has ever made.
+
+Key Specifications:
+- Driver: 8.4mm Dynamic Driver X
+- Frequency Response: 20 Hz - 40,000 Hz
+- Battery Life: 8 hours (earbuds) + 16 hours (case) with NC ON
+- Charging: USB-C, Qi wireless charging
+- Bluetooth: 5.3 with LDAC, AAC, SBC, LC3
+- Active Noise Cancellation: Yes, Integrated Processor V2
+- Speak-to-Chat: Yes
+- Multipoint Connection: Yes
+- Weight: 5.9g per earbud
+- IPX4 Water Resistance: Yes
+- Colors: Black, Silver
+
+Best For: Commuting, gym workouts (with IPX4), premium true wireless experience
+Pros: Excellent ANC for earbuds, very compact, wireless charging case, great sound
+Cons: Expensive, no wing tips for sports, average battery vs competitors
+
+---
+
+## Sony WF-1000XM4 - True Wireless Earbuds
+
+Price: Rs 13,990
+Category: True Wireless, In-Ear, Noise Cancelling
+Release Year: 2021
+
+The WF-1000XM4 features a 6mm driver and Sony's Integrated Processor V1 for excellent noise cancellation. The earbuds support Hi-Res Audio via LDAC and feature IPX4 water resistance.
+
+Key Specifications:
+- Driver: 6mm
+- Battery Life: 8 hours (earbuds) + 16 hours (case) with NC ON
+- Bluetooth: 5.2 with LDAC
+- Active Noise Cancellation: Yes
+- IPX4 Water Resistance: Yes
+- Weight: 7.3g per earbud
+- Colors: Black, Silver
+
+Best For: Budget-friendly premium true wireless, daily commute
+Pros: Great ANC, LDAC support, IPX4, more affordable than XM5
+Cons: Larger than XM5, foam tips may not suit everyone
+
+---
+
+## Sony WH-CH720N - Wireless Noise Cancelling Headphones
+
+Price: Rs 9,990
+Category: Over-Ear, Wireless, Noise Cancelling
+Release Year: 2023
+
+The Sony WH-CH720N is a mid-range wireless noise-cancelling headphone offering excellent value. Despite the lower price, it features Sony's Dual Noise Sensor Technology and a lightweight design at just 192g, making it one of the lightest NC headphones available.
+
+Key Specifications:
+- Driver: 30mm
+- Battery Life: 35 hours with NC ON
+- Charging: USB-C, 3 minutes charge = 1 hour playback
+- Bluetooth: 5.2 with AAC, SBC
+- Active Noise Cancellation: Yes, Dual Noise Sensor Technology
+- Multipoint Connection: Yes
+- Weight: 192g
+- Colors: Black, White, Blue
+- Ambient Sound Mode: Yes
+
+Best For: Budget noise cancelling, lightweight all-day wear, students, work from home
+Pros: Very lightweight, long battery life, affordable ANC, comfortable
+Cons: No LDAC support, plastic build quality, average sound compared to XM series
+
+---
+
+## Sony WH-CH520 - Wireless On-Ear Headphones
+
+Price: Rs 4,490
+Category: On-Ear, Wireless
+Release Year: 2023
+
+The Sony WH-CH520 is an affordable wireless headphone for everyday use. It offers up to 50 hours of battery life and supports Sony's 360 Reality Audio. No noise cancellation, but excellent value for casual listening.
+
+Key Specifications:
+- Driver: 30mm
+- Battery Life: 50 hours
+- Charging: USB-C, 3 minutes charge = 1.5 hours playback
+- Bluetooth: 5.2 with AAC, SBC
+- Active Noise Cancellation: No
+- Weight: 147g
+- Colors: Black, White, Blue, Beige
+
+Best For: Budget wireless headphones, casual listening, long battery needs, students
+Pros: 50-hour battery life, extremely lightweight, very affordable
+Cons: No ANC, on-ear can be less comfortable for long sessions, no LDAC
+
+---
+
+## Sony MDR-7506 - Professional Studio Monitor Headphones
+
+Price: Rs 8,499
+Category: Over-Ear, Wired, Professional
+Release Year: 1991 (still in production)
+
+The Sony MDR-7506 is an industry-standard professional studio headphone used by audio engineers and music producers worldwide. It provides accurate, flat frequency response ideal for monitoring and mixing.
+
+Key Specifications:
+- Driver: 40mm
+- Frequency Response: 10 Hz - 20,000 Hz
+- Impedance: 63 ohms
+- Sensitivity: 106 dB/mW
+- Cable: 1.2m coiled cable (extends to 3m)
+- Weight: 230g
+- Connection: 3.5mm with 6.3mm adapter
+- Foldable: Yes
+
+Best For: Studio monitoring, audio production, DJ use, professional use
+Pros: Flat accurate sound, durable build, industry standard, affordable for professional use
+Cons: No wireless, no ANC, can be uncomfortable for very long sessions
+
+---
+
+## Sony WF-C700N - True Wireless Noise Cancelling Earbuds
+
+Price: Rs 7,490
+Category: True Wireless, In-Ear, Noise Cancelling
+Release Year: 2023
+
+The Sony WF-C700N offers noise cancellation at an affordable price point. These earbuds are compact and lightweight, featuring Sony's noise sensor technology and ambient sound mode.
+
+Key Specifications:
+- Driver: 5mm
+- Battery Life: 7.5 hours (earbuds) + 7.5 hours (case) with NC ON
+- Bluetooth: 5.2 with AAC, SBC
+- Active Noise Cancellation: Yes
+- IPX4 Water Resistance: Yes
+- Weight: 4.6g per earbud
+- Colors: Black, White, Lavender, Sage Green
+
+Best For: Budget noise cancelling earbuds, first-time ANC users, casual listening, gym
+Pros: Affordable ANC, lightweight and comfortable, IPX4, fun colors
+Cons: No LDAC, shorter battery than XM5, no wireless charging
+
+---
+
+## Sony LinkBuds S (WF-LS900N) - True Wireless Earbuds
+
+Price: Rs 11,990
+Category: True Wireless, In-Ear, Noise Cancelling
+Release Year: 2022
+
+The Sony LinkBuds S are ultra-lightweight earbuds weighing just 4.8g per earbud. They feature active noise cancellation, adaptive sound control, and LDAC support in a compact design.
+
+Key Specifications:
+- Driver: 5mm
+- Battery Life: 6 hours (earbuds) + 14 hours (case) with NC ON
+- Bluetooth: 5.2 with LDAC, AAC, SBC
+- Active Noise Cancellation: Yes, Adaptive Sound Control
+- IPX4 Water Resistance: Yes
+- Weight: 4.8g per earbud
+- Colors: Black, White, Earth Blue, Ecru
+
+Best For: All-day wear, active lifestyle, users wanting lightweight ANC earbuds
+Pros: Ultra-lightweight, LDAC support, good ANC, comfortable for long wear
+Cons: Shorter battery compared to WF-1000XM5, smaller driver
+
+---
+
+## Comparison: Which Sony Headphone is Best for You?
+
+For Noise Cancellation:
+- Best Overall: WH-1000XM5 (over-ear) or WF-1000XM5 (true wireless)
+- Best Value: WH-CH720N (over-ear) or WF-C700N (true wireless)
+
+For Budget Under Rs 5,000:
+- WH-CH520 at Rs 4,490 is the only option - great battery, no ANC
+
+For Budget Under Rs 10,000:
+- WH-CH720N (Rs 9,990) for over-ear with ANC
+- WF-C700N (Rs 7,490) for true wireless with ANC
+- MDR-7506 (Rs 8,499) for wired professional monitoring
+
+For Gym and Workouts:
+- WF-1000XM5 (premium, IPX4)
+- WF-C700N (budget-friendly, IPX4)
+- WF-1000XM4 (mid-range, IPX4)
+
+For Phone Calls:
+- WH-1000XM5 (4 beamforming mics, best call quality)
+- WF-1000XM5 (bone conduction sensor for clear voice)
+
+For Long Flights:
+- WH-1000XM5 (30hr battery, best ANC)
+- WH-1000XM4 (30hr battery, foldable for travel)
+
+For Students / Work From Home:
+- WH-CH720N (affordable ANC, lightweight, 35hr battery)
+- WH-CH520 (cheapest, 50hr battery, no ANC)
+
+For Audiophiles:
+- WH-1000XM5 with LDAC (wireless Hi-Res)
+- MDR-7506 (wired, flat studio response)
