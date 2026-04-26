@@ -1,12 +1,38 @@
 import axios from 'axios';
 
-const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+// Use same-origin requests by default so Vite proxy handles backend routing.
+// This avoids CORS issues when frontend runs on localhost, 127.0.0.1, or LAN IP.
+const API_BASE = import.meta.env.VITE_API_URL?.trim() || '';
 
 const api = axios.create({
   baseURL: API_BASE,
-  timeout: 60000,
+  // 120 seconds – Gemini/OpenAI calls can take time on first request
+  timeout: 120000,
   headers: { 'Content-Type': 'application/json' },
 });
+
+// Global response interceptor to give meaningful error messages
+api.interceptors.response.use(
+  (res) => res,
+  (error) => {
+    if (error.code === 'ECONNABORTED' || error.message?.includes('timeout')) {
+      return Promise.reject(
+        new Error('Request timed out. The AI model is taking too long — please try again.')
+      );
+    }
+    if (!error.response) {
+      return Promise.reject(
+        new Error('Cannot connect to the backend. Make sure both frontend and backend servers are running.')
+      );
+    }
+    // Surface the backend's detail message
+    const detail = error.response?.data?.detail;
+    if (detail) {
+      return Promise.reject(new Error(detail));
+    }
+    return Promise.reject(error);
+  }
+);
 
 export async function submitQuery(question, topK = 5) {
   const { data } = await api.post('/api/v1/query/', {

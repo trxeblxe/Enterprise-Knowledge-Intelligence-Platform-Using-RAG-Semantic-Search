@@ -1,5 +1,6 @@
 import os
 import json
+import hashlib
 import faiss
 import numpy as np
 from typing import List, Dict, Any, Optional
@@ -8,9 +9,35 @@ from app.core.config import get_settings
 
 settings = get_settings()
 
+class OfflineHashEmbedder:
+    def __init__(self, dimension: int = 384):
+        self._dimension = dimension
+
+    def get_sentence_embedding_dimension(self) -> int:
+        return self._dimension
+
+    def encode(self, texts, normalize_embeddings: bool = True, batch_size: int = 32):
+        vectors = []
+        for text in texts:
+            vec = np.zeros(self._dimension, dtype=np.float32)
+            for token in str(text).lower().split():
+                digest = hashlib.sha256(token.encode("utf-8")).digest()
+                idx = int.from_bytes(digest[:4], "big") % self._dimension
+                val = (int.from_bytes(digest[4:8], "big") / 2**32) * 2.0 - 1.0
+                vec[idx] += val
+            if normalize_embeddings:
+                norm = np.linalg.norm(vec)
+                if norm > 0:
+                    vec = vec / norm
+            vectors.append(vec)
+        return np.array(vectors, dtype=np.float32)
+
 class VectorStoreService:
     def __init__(self):
-        self.embedder = SentenceTransformer(settings.embedding_model)
+        try:
+            self.embedder = SentenceTransformer(settings.embedding_model)
+        except Exception:
+            self.embedder = OfflineHashEmbedder()
         self.dimension = self.embedder.get_sentence_embedding_dimension()
         self.index = faiss.IndexFlatIP(self.dimension)
         self._metadata: Dict[int, Dict[str, Any]] = {}

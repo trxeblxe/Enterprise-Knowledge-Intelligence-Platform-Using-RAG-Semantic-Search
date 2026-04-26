@@ -13,6 +13,9 @@ from app.api.query import router as query_router
 settings = get_settings()
 logger = logging.getLogger("uvicorn")
 
+# Catalog file to auto-ingest on first startup
+CATALOG_FILE = os.path.join(os.path.dirname(__file__), "sony_headphones_catalog.txt")
+
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     # Startup
@@ -34,6 +37,20 @@ async def lifespan(app: FastAPI):
     logger.info(f"Loaded {stats['total_chunks']} chunks from {stats['total_documents']} documents.")
     logger.info(f"LLM Provider: {settings.llm_provider}, Model: {settings.llm_model}")
     
+    # Auto-ingest the built-in catalog if no documents are indexed yet
+    if stats["total_chunks"] == 0 and os.path.exists(CATALOG_FILE):
+        logger.info("No documents found — auto-ingesting sony_headphones_catalog.txt ...")
+        try:
+            with open(CATALOG_FILE, "rb") as f:
+                file_bytes = f.read()
+            result = await document_service.ingest_document(file_bytes, "sony_headphones_catalog.txt")
+            if result.success:
+                logger.info(f"Auto-ingested catalog: {result.chunks_created} chunks created.")
+            else:
+                logger.warning(f"Auto-ingest failed: {result.message}")
+        except Exception as exc:
+            logger.error(f"Error during auto-ingest: {exc}")
+    
     yield
     
     # Shutdown
@@ -50,6 +67,7 @@ app = FastAPI(
 app.add_middleware(
     CORSMiddleware,
     allow_origins=settings.cors_origins_list,
+    allow_origin_regex=r"^https?://(localhost|127\.0\.0\.1|192\.168\.\d{1,3}\.\d{1,3})(:\d+)?$",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

@@ -22,10 +22,17 @@ async def submit_query(
     try:
         response = await rag_service.query(body)
         return response
+    except RuntimeError as e:
+        # Friendly user-facing error (timeout, bad API key, etc.)
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail=str(e)
+        )
     except Exception as e:
-        if isinstance(e, RuntimeError):
-            raise HTTPException(status_code=status.HTTP_502_BAD_GATEWAY, detail=str(e))
-        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e))
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Unexpected error: {str(e)}"
+        )
 
 @router.get("/health", response_model=HealthResponse)
 async def health_check(request: Request):

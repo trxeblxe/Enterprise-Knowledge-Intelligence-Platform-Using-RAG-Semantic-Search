@@ -5,7 +5,10 @@ from typing import List, Tuple, Dict
 from datetime import datetime
 from pypdf import PdfReader
 from docx import Document as DocxDocument
-from langchain.text_splitter import RecursiveCharacterTextSplitter
+try:
+    from langchain_text_splitters import RecursiveCharacterTextSplitter
+except ImportError:
+    from langchain.text_splitter import RecursiveCharacterTextSplitter
 from app.core.config import get_settings
 from app.models.schemas import UploadResponse, DocumentMetadata, DocumentInfo
 from app.services.vector_store_service import VectorStoreService
