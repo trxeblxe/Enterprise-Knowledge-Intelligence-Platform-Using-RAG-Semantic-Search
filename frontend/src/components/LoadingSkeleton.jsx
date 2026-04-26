@@ -1,6 +1,11 @@
 export default function LoadingSkeleton() {
   return (
     <div id="loading-skeleton" className="max-w-7xl mx-auto px-6 py-12 animate-pulse">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-6">
+        {[...Array(3)].map((_, i) => (
+          <div key={i} className="h-14 rounded-xl animate-skeleton border border-sony-surface-light" />
+        ))}
+      </div>
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
         {/* Answer panel skeleton */}
         <div className="lg:col-span-3 space-y-4">
@@ -12,6 +17,10 @@ export default function LoadingSkeleton() {
             <div className="h-4 animate-skeleton rounded w-9/12" />
             <div className="h-4 animate-skeleton rounded w-full" />
             <div className="h-4 animate-skeleton rounded w-8/12" />
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <div className="h-20 animate-skeleton rounded-xl" />
+            <div className="h-20 animate-skeleton rounded-xl" />
           </div>
           {/* Confidence ring skeleton */}
           <div className="flex items-center gap-4 mt-4">

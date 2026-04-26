@@ -19,6 +19,7 @@ export default function ConfidenceRing({ value = 0, size = 80 }) {
   }, [offset, circumference]);
 
   const color = normalizedValue >= 70 ? '#34C759' : normalizedValue >= 40 ? '#FF9500' : '#E4002B';
+  const grade = normalizedValue >= 80 ? 'High' : normalizedValue >= 55 ? 'Moderate' : 'Low';
 
   return (
     <div className="flex items-center gap-4" id="confidence-ring">
@@ -57,7 +58,7 @@ export default function ConfidenceRing({ value = 0, size = 80 }) {
       </div>
       <div>
         <p className="text-sm font-medium text-sony-white">Confidence</p>
-        <p className="text-xs text-sony-gray">Relevance Score</p>
+        <p className="text-xs text-sony-gray">Relevance Score · {grade}</p>
       </div>
     </div>
   );

@@ -10,23 +10,41 @@ export default function ParticleBackground() {
   const options = useMemo(() => ({
     fullScreen: { enable: false },
     fpsLimit: 60,
+    background: { color: { value: 'transparent' } },
     particles: {
-      number: { value: 30, density: { enable: true, width: 1920, height: 1080 } },
+      number: { value: 36, density: { enable: true, width: 1920, height: 1080 } },
       color: { value: '#E4002B' },
-      opacity: { value: { min: 0.05, max: 0.15 } },
-      size: { value: { min: 1, max: 2.5 } },
+      opacity: { value: { min: 0.05, max: 0.18 } },
+      size: { value: { min: 1, max: 2.8 } },
       move: {
         enable: true,
-        speed: 0.3,
+        speed: 0.45,
         direction: 'none',
         outModes: { default: 'out' },
       },
       links: {
         enable: true,
-        distance: 150,
+        distance: 140,
         color: '#E4002B',
-        opacity: 0.04,
+        opacity: 0.05,
         width: 1,
+      },
+    },
+    interactivity: {
+      events: {
+        onHover: {
+          enable: true,
+          mode: 'grab',
+        },
+        resize: true,
+      },
+      modes: {
+        grab: {
+          distance: 120,
+          links: {
+            opacity: 0.2,
+          },
+        },
       },
     },
     detectRetina: true,

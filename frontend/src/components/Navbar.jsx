@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Activity } from 'lucide-react';
+import { Activity, AudioLines, Shield } from 'lucide-react';
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -23,13 +23,15 @@ export default function Navbar() {
           <span className="text-2xl font-black tracking-[0.3em] text-sony-white">
             SONY
           </span>
+          <div className="hidden lg:flex items-center gap-1 text-[10px] text-sony-gray border border-sony-surface-light rounded-full px-2 py-1">
+            <AudioLines size={11} className="text-sony-red" />
+            AUDIO KNOWLEDGE
+          </div>
         </div>
 
         {/* Center subtitle */}
         <div className="hidden md:block">
-          <span className="text-sm tracking-widest text-sony-gray uppercase">
-            Knowledge Intelligence Platform
-          </span>
+          <span className="text-sm tracking-widest text-sony-gray uppercase">Knowledge Intelligence Platform</span>
         </div>
 
         {/* AI Active badge */}
@@ -40,6 +42,7 @@ export default function Navbar() {
           </span>
           <Activity size={14} className="text-sony-red" />
           <span className="text-xs font-medium text-sony-gray">AI Active</span>
+          <Shield size={12} className="text-sony-gray" />
         </div>
       </div>
 

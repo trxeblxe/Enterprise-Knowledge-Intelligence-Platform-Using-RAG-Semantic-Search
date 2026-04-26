@@ -1,10 +1,12 @@
 import { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { ChevronDown, ChevronUp, FileText } from 'lucide-react';
+import { ChevronDown, ChevronUp, FileText, Bookmark, ScanSearch } from 'lucide-react';
 
 export default function SourceChunks({ sources = [] }) {
   const [expanded, setExpanded] = useState({});
+  const [selected, setSelected] = useState(null);
   const cardRefs = useRef({});
+  const MotionDiv = motion.div;
 
   const toggleExpand = (id) => {
     setExpanded((prev) => ({ ...prev, [id]: !prev[id] }));
@@ -17,6 +19,7 @@ export default function SourceChunks({ sources = [] }) {
       if (el) {
         el.scrollIntoView({ behavior: 'smooth', block: 'center' });
         el.classList.add('ring-2', 'ring-sony-red');
+        setSelected(index);
         setTimeout(() => el.classList.remove('ring-2', 'ring-sony-red'), 2000);
       }
     };
@@ -24,7 +27,7 @@ export default function SourceChunks({ sources = [] }) {
   }, []);
 
   return (
-    <motion.div
+    <MotionDiv
       id="source-chunks"
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
@@ -33,19 +36,26 @@ export default function SourceChunks({ sources = [] }) {
     >
       <h2 className="text-xl font-bold text-sony-white flex items-center gap-2">
         <span className="w-1.5 h-6 bg-sony-red rounded-full inline-block" />
-        Retrieved Knowledge Chunks
+        Retrieved Evidence
       </h2>
+
+      <div className="rounded-xl border border-sony-surface-light bg-sony-surface/50 p-3 text-xs text-sony-gray inline-flex items-center gap-2">
+        <ScanSearch size={13} className="text-sony-red" />
+        Click source badges in the answer to jump here. Expand cards for full chunk text.
+      </div>
 
       <div className="space-y-3 max-h-[600px] overflow-y-auto pr-1">
         {sources.map((source, i) => (
-          <motion.div
+          <MotionDiv
             key={source.id ?? i}
             ref={(el) => (cardRefs.current[i] = el)}
             initial={{ opacity: 0, y: 20, scale: 0.97 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ duration: 0.4, delay: 0.3 + i * 0.08 }}
             data-source-index={i}
-            className="glass rounded-xl p-5 transition-all duration-300 hover:border-sony-red/20"
+            className={`glass rounded-xl p-5 transition-all duration-300 hover:border-sony-red/20 ${
+              selected === i ? 'border border-sony-red/40' : ''
+            }`}
           >
             {/* Header */}
             <div className="flex items-start justify-between mb-3">
@@ -55,9 +65,21 @@ export default function SourceChunks({ sources = [] }) {
                 {source.page && <span>p.{source.page}</span>}
                 <span className="text-sony-gray-dark">Chunk #{source.chunkIndex}</span>
               </div>
-              <span className="text-xs font-bold text-sony-red bg-sony-red/10 px-2 py-1 rounded-md">
-                Source {i + 1}
-              </span>
+              <div className="flex items-center gap-2">
+                <span className="text-[11px] font-bold text-sony-red bg-sony-red/10 px-2 py-1 rounded-md">
+                  Source {i + 1}
+                </span>
+                <button
+                  type="button"
+                  onClick={() => setSelected(i)}
+                  className="text-[11px] px-2 py-1 rounded-md border border-sony-surface-light text-sony-gray hover:text-sony-white hover:border-sony-red/40 transition-colors"
+                >
+                  <span className="inline-flex items-center gap-1">
+                    <Bookmark size={11} />
+                    Pin
+                  </span>
+                </button>
+              </div>
             </div>
 
             {/* Excerpt */}
@@ -84,7 +106,7 @@ export default function SourceChunks({ sources = [] }) {
                 <span className="text-sony-white font-medium">{source.score.toFixed(1)}%</span>
               </div>
               <div className="h-1.5 bg-sony-surface rounded-full overflow-hidden">
-                <motion.div
+                <MotionDiv
                   className="h-full rounded-full"
                   style={{
                     background: 'linear-gradient(90deg, #E4002B, #FF4D6A)',
@@ -95,9 +117,9 @@ export default function SourceChunks({ sources = [] }) {
                 />
               </div>
             </div>
-          </motion.div>
+          </MotionDiv>
         ))}
       </div>
-    </motion.div>
+    </MotionDiv>
   );
 }

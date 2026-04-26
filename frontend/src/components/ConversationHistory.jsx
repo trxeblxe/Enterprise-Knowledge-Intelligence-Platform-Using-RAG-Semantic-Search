@@ -1,21 +1,24 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronUp, ChevronDown, RotateCcw, Bot, User } from 'lucide-react';
+import { ChevronUp, ChevronDown, RotateCcw, Bot, User, MessageSquareText } from 'lucide-react';
 
 export default function ConversationHistory({ history = [], onNewSearch }) {
   const [isOpen, setIsOpen] = useState(false);
+  const [active, setActive] = useState(null);
+  const MotionDiv = motion.div;
 
   if (history.length === 0) return null;
 
   return (
-    <div id="conversation-history" className="max-w-7xl mx-auto px-6 pb-8">
+    <div id="conversation-history" className="max-w-7xl mx-auto px-6 pb-8 pt-2">
       {/* Toggle bar */}
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="w-full flex items-center justify-between py-3 px-5 glass rounded-xl
                    hover:border-sony-red/20 transition-all cursor-pointer mb-2"
       >
-        <span className="text-sm font-medium text-sony-gray">
+        <span className="text-sm font-medium text-sony-gray inline-flex items-center gap-2">
+          <MessageSquareText size={14} className="text-sony-red" />
           Conversation History ({history.length} {history.length === 1 ? 'exchange' : 'exchanges'})
         </span>
         <div className="flex items-center gap-3">
@@ -31,7 +34,7 @@ export default function ConversationHistory({ history = [], onNewSearch }) {
 
       <AnimatePresence>
         {isOpen && (
-          <motion.div
+          <MotionDiv
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
@@ -40,7 +43,13 @@ export default function ConversationHistory({ history = [], onNewSearch }) {
           >
             <div className="glass rounded-xl p-5 max-h-96 overflow-y-auto space-y-4">
               {history.map((item, i) => (
-                <div key={i} className="space-y-3">
+                <div
+                  key={i}
+                  className={`space-y-3 rounded-xl p-3 transition-colors ${
+                    active === i ? 'bg-sony-surface/65' : 'hover:bg-sony-surface/40'
+                  }`}
+                  onMouseEnter={() => setActive(i)}
+                >
                   {/* User message */}
                   <div className="flex justify-end">
                     <div className="flex items-start gap-2 max-w-[75%]">
@@ -62,7 +71,7 @@ export default function ConversationHistory({ history = [], onNewSearch }) {
                       <div className="bg-sony-surface rounded-2xl rounded-tl-sm px-4 py-3">
                         <p className="text-sm text-sony-white/80 line-clamp-4">{item.answer}</p>
                         <p className="text-xs text-sony-gray mt-1">
-                          {item.sources?.length || 0} sources | {((item.processingTime || 0) / 1000).toFixed(2)}s
+                          {item.sources?.length || 0} sources | {((item.processingTime || 0) / 1000).toFixed(2)}s | {Math.round(item.confidence || 0)}% confidence
                         </p>
                       </div>
                     </div>
@@ -74,7 +83,7 @@ export default function ConversationHistory({ history = [], onNewSearch }) {
                 </div>
               ))}
             </div>
-          </motion.div>
+          </MotionDiv>
         )}
       </AnimatePresence>
     </div>
