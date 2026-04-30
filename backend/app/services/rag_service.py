@@ -21,6 +21,21 @@ GEMINI_FALLBACK_MODELS = [
 ]
 
 class RAGService:
+    """
+    Retrieval-Augmented Generation engine.
+
+    Query flow:
+      1. Embed the user's question with the same model used for documents.
+      2. Retrieve top-K chunks from FAISS.
+      3. Build a prompt with the retrieved context.
+      4. Send to the LLM (Gemini / OpenAI / Anthropic) for generation.
+      5. If the LLM fails (bad key, model not found), fall back to an
+         extractive answer built directly from the retrieved chunks.
+
+    The extractive fallback ensures the user always gets *something* useful
+    even when the LLM is unavailable — a key reliability decision for
+    enterprise environments where API keys may expire or rotate.
+    """
     def __init__(self, vector_store: VectorStoreService):
         self.vector_store = vector_store
         self._llm_init_error = None
@@ -203,6 +218,14 @@ class RAGService:
         return None
 
     def _build_extractive_answer(self, chunks: List[dict]) -> str:
+        """
+        Construct a plain-text answer by excerpting the most relevant chunks.
+
+        This is our 'graceful degradation' strategy: if the LLM is down,
+        the user still sees relevant passages from their own documents,
+        along with source citations. It's intentionally simple — no
+        summarization — so we never hallucinate.
+        """
         top_chunks = chunks[:3]
         if not top_chunks:
             return "I could not find relevant document context to answer this."

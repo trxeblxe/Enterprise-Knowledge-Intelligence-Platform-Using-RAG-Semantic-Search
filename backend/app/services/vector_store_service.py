@@ -10,6 +10,13 @@ from app.core.config import get_settings
 settings = get_settings()
 
 class OfflineHashEmbedder:
+    """
+    Deterministic hash-based embedder used as a fallback when
+    SentenceTransformer models can't be downloaded (e.g. in CI, offline envs).
+    Produces fixed-dimension vectors by hashing each word token via SHA-256
+    and scattering the result across the vector dimensions. Not semantically
+    meaningful, but keeps the pipeline functional for testing and development.
+    """
     def __init__(self, dimension: int = 384):
         self._dimension = dimension
 
@@ -33,12 +40,26 @@ class OfflineHashEmbedder:
         return np.array(vectors, dtype=np.float32)
 
 class VectorStoreService:
+    """
+    Core vector search engine backed by FAISS.
+
+    We use IndexFlatIP (Inner Product) instead of IndexFlatL2 because our
+    embeddings are L2-normalized, so inner product is equivalent to cosine
+    similarity and avoids the need for a separate normalization step during search.
+
+    Persistence: the index and metadata are saved to disk after every write
+    operation, so the system survives restarts without re-embedding.
+    """
+
     def __init__(self):
+        # Attempt to load the real transformer model; fall back to the hash
+        # embedder if the model can't be fetched (offline / CI environments).
         try:
             self.embedder = SentenceTransformer(settings.embedding_model)
         except Exception:
             self.embedder = OfflineHashEmbedder()
         self.dimension = self.embedder.get_sentence_embedding_dimension()
+        # Inner Product index — equivalent to cosine sim on normalized vectors
         self.index = faiss.IndexFlatIP(self.dimension)
         self._metadata: Dict[int, Dict[str, Any]] = {}
         self._next_id: int = 0
@@ -59,6 +80,12 @@ class VectorStoreService:
         self._save_to_disk()
 
     def similarity_search(self, query: str, top_k: int, filter_doc_id: Optional[str] = None) -> List[Dict[str, Any]]:
+        """
+        Find the top-K most relevant chunks for a query string.
+
+        When filter_doc_id is provided, we search 3× more candidates so that
+        after filtering to a single document, we still return enough results.
+        """
         if self.index.ntotal == 0:
             return []
             
@@ -87,6 +114,13 @@ class VectorStoreService:
         return results
 
     def delete_by_doc_id(self, doc_id: str) -> int:
+        """
+        Remove all chunks belonging to a document.
+
+        FAISS doesn't support in-place deletion, so we rebuild the entire index
+        from scratch minus the deleted vectors. This is acceptable because the
+        typical index size (< 100 K vectors) makes reconstruction sub-second.
+        """
         ids_to_keep = []
         new_metadata = {}
         new_next_id = 0

@@ -74,4 +74,29 @@ export async function getHealth() {
   return data;
 }
 
+/**
+ * Upload a document file (PDF, DOCX, TXT) to the backend for ingestion.
+ * Uses FormData so the server receives it as a multipart file upload.
+ *
+ * @param {File}     file           - The file object from an <input> or drop event.
+ * @param {Function} onProgress     - Optional callback receiving upload percentage (0-100).
+ * @returns {Promise<Object>}       - The backend's UploadResponse JSON.
+ */
+export async function uploadDocument(file, onProgress) {
+  const formData = new FormData();
+  formData.append('file', file);
+
+  const { data } = await api.post('/api/v1/documents/upload', formData, {
+    headers: { 'Content-Type': 'multipart/form-data' },
+    // Axios progress tracking
+    onUploadProgress: (evt) => {
+      if (onProgress && evt.total) {
+        const pct = Math.round((evt.loaded / evt.total) * 100);
+        onProgress(pct);
+      }
+    },
+  });
+  return data;
+}
+
 export default api;

@@ -16,8 +16,18 @@ from app.services.vector_store_service import VectorStoreService
 settings = get_settings()
 
 class DocumentService:
+    """
+    Handles the full document lifecycle: parse → chunk → embed → index.
+
+    Supported formats: PDF, DOCX, and plain TXT.  Each format is parsed into
+    a list of (text, page_number) tuples so that source page is preserved
+    through chunking and can be cited in answers.
+    """
     def __init__(self, vector_store: VectorStoreService):
         self.vector_store = vector_store
+        # Recursive splitter with overlap — the overlap ensures that sentences
+        # split at a boundary still retain context from the previous chunk,
+        # which significantly improves retrieval quality.
         self.text_splitter = RecursiveCharacterTextSplitter(
             chunk_size=settings.chunk_size,
             chunk_overlap=settings.chunk_overlap,

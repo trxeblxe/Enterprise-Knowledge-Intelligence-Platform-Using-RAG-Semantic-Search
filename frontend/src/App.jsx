@@ -6,6 +6,7 @@ import {
   CheckCircle2,
   Clock3,
   Database,
+  Upload,
 } from 'lucide-react';
 import Navbar from './components/Navbar';
 import HeroSection from './components/HeroSection';
@@ -15,6 +16,7 @@ import ResultsPanel from './components/ResultsPanel';
 import ConversationHistory from './components/ConversationHistory';
 import Footer from './components/Footer';
 import QueryPlaybook from './components/QueryPlaybook';
+import DocumentUpload from './components/DocumentUpload';
 import { submitQuery } from './api/client';
 
 const MotionDiv = motion.div;
@@ -114,6 +116,7 @@ export default function App() {
   const [error, setError] = useState(null);
   const [history, setHistory] = useState([]);
   const [activeQuery, setActiveQuery] = useState('');
+  const [showUpload, setShowUpload] = useState(false);
 
   const handleSearch = useCallback(async (query) => {
     if (!query || !query.trim()) return;
@@ -179,6 +182,33 @@ export default function App() {
           error={error}
           historyCount={history.length}
         />
+
+        {/* Upload toggle button */}
+        <div className="max-w-7xl mx-auto px-6 mt-4 flex justify-end">
+          <button
+            id="toggle-upload-btn"
+            onClick={() => setShowUpload((v) => !v)}
+            className="flex items-center gap-2 text-xs px-4 py-2 rounded-lg
+                       border border-sony-surface-light text-sony-gray
+                       hover:text-sony-white hover:border-sony-red/50
+                       transition-all duration-300 cursor-pointer"
+          >
+            <Upload size={14} />
+            {showUpload ? 'Hide Upload' : 'Upload Document'}
+          </button>
+        </div>
+
+        <AnimatePresence>
+          {showUpload && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+            >
+              <DocumentUpload />
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         {!hasResults && (
           <QueryPlaybook onRunPreset={handleSearch} />
