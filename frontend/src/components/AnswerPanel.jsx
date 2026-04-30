@@ -9,14 +9,18 @@ const MotionDiv = motion.div;
 export default function AnswerPanel({ answer, confidence, processingTime, modelUsed, onSourceClick }) {
   const { displayedText, isTyping } = useTypewriter(answer, 8, !!answer);
 
-  // Parse citation badges [Source N] from the answer text
+  // Parse citation badges [Source N], **bold**, and _italic_ from the answer
   const renderedText = useMemo(() => {
     if (!displayedText) return null;
-    const parts = displayedText.split(/(\[Source\s*\d+[^\]]*\])/gi);
+
+    // Split on citation badges, bold, and italic markers
+    const parts = displayedText.split(/(\[Source\s*\d+[^\]]*\]|\*\*[^*]+\*\*|_[^_]+_)/gi);
+
     return parts.map((part, i) => {
-      const match = part.match(/\[Source\s*(\d+)[^\]]*\]/i);
-      if (match) {
-        const sourceIndex = parseInt(match[1], 10) - 1;
+      // Citation badge
+      const citeMatch = part.match(/\[Source\s*(\d+)[^\]]*\]/i);
+      if (citeMatch) {
+        const sourceIndex = parseInt(citeMatch[1], 10) - 1;
         return (
           <button
             key={i}
@@ -29,6 +33,17 @@ export default function AnswerPanel({ answer, confidence, processingTime, modelU
           </button>
         );
       }
+
+      // Bold text: **text**
+      if (/^\*\*[^*]+\*\*$/.test(part)) {
+        return <strong key={i} className="text-sony-white font-semibold">{part.slice(2, -2)}</strong>;
+      }
+
+      // Italic text: _text_
+      if (/^_[^_]+_$/.test(part)) {
+        return <em key={i} className="text-sony-gray italic">{part.slice(1, -1)}</em>;
+      }
+
       return <span key={i}>{part}</span>;
     });
   }, [displayedText, onSourceClick]);

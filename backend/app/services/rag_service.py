@@ -45,7 +45,9 @@ class RAGService:
             "You are an expert enterprise knowledge assistant. Answer questions\n"
             "using ONLY the provided document context. Cite which document your\n"
             "answer comes from. If context is insufficient, say so clearly.\n"
-            "Do NOT use training knowledge to fill gaps."
+            "Do NOT use training knowledge to fill gaps.\n"
+            "Provide comprehensive, detailed, and complete answers with no word\n"
+            "or length limit. Include all relevant information from the context."
         )
         
         try:
@@ -231,15 +233,42 @@ class RAGService:
             return "I could not find relevant document context to answer this."
 
         lines = [
-            "AI model is currently unavailable, so here is a context-based answer from your indexed documents:",
-            ""
+            "Based on the indexed documents, here is what was found:\n",
         ]
+
         for i, chunk in enumerate(top_chunks, start=1):
             filename = chunk.get("filename", "Unknown")
-            page = chunk.get("source_page", 1)
             text = (chunk.get("text", "") or "").strip()
-            excerpt = text[:320] + ("..." if len(text) > 320 else "")
-            lines.append(f"{i}. ({filename}, page {page}) {excerpt}")
-        lines.append("")
-        lines.append("Tip: Set a working LLM/API key to get fully generated answers.")
+
+            # Clean up the raw text: remove markdown headers, separators,
+            # excessive whitespace and truncate to a readable length.
+            cleaned = self._clean_excerpt(text)
+            if not cleaned:
+                continue
+
+            lines.append(f"**Source {i}** — _{filename}_")
+            lines.append(f"{cleaned}\n")
+
         return "\n".join(lines)
+
+    @staticmethod
+    def _clean_excerpt(text: str) -> str:
+        """
+        Tidy up a raw document chunk for display:
+        - Strip markdown heading markers (##)
+        - Remove long separator lines (===, ---)
+        - Collapse multiple blank lines
+        No length truncation — show the full chunk.
+        """
+        import re
+
+        # Remove markdown heading markers
+        text = re.sub(r"^#{1,6}\s*", "", text, flags=re.MULTILINE)
+        # Remove separator lines
+        text = re.sub(r"^[=\-]{3,}$", "", text, flags=re.MULTILINE)
+        # Collapse multiple blank lines into one
+        text = re.sub(r"\n{3,}", "\n\n", text)
+        # Clean up leading/trailing whitespace
+        text = text.strip()
+
+        return text

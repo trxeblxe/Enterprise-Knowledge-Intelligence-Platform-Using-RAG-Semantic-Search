@@ -25,7 +25,7 @@ class Settings(BaseSettings):
     
     top_k_results: int = 5
     temperature: float = 0.1
-    max_tokens: int = 1024
+    max_tokens: int = 8192
     
     host: str = "0.0.0.0"
     port: int = 8000
